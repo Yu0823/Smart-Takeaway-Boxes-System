@@ -1,2 +1,2 @@
-#
-Based on Singo https://github.com/Gourouting/singo
+#Smart-Takeaway-Boxes-System
+Based on Go 1.16.5 and MySQL 8.0.27
