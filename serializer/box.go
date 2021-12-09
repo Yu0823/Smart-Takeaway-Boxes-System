@@ -20,7 +20,7 @@ func BuildNewBoxSuccessRes(box model.Box) Response {
 	}
 }
 
-// BuildNoDtaRes 无空闲外卖柜相应
+// BuildNoDataRes 无空闲外卖柜相应
 func BuildNoDataRes(msg string) Response {
 	return Response{
 		Msg:   msg,

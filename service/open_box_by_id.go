@@ -3,6 +3,7 @@ package service
 import (
 	"fmt"
 	"gorm.io/gorm"
+	"singo/control"
 	"singo/model"
 	"singo/serializer"
 
@@ -43,6 +44,11 @@ func (service *OpenBoxByIdService) OpenBoxById(c *gin.Context) serializer.Respon
 	err = model.DB.Save(box).Error
 	if err != nil{
 		return serializer.Err(serializer.CodeDBError, "数据库操作失败", err)
+	}
+
+	err = control.OpenBoxById(box.Id, true)
+	if err != nil{
+		return serializer.Err(serializer.CodeHardwareError, "硬件操作失败", err)
 	}
 
 	return serializer.BuildNoDataRes(fmt.Sprintf("%d号外卖柜开门成功",box.Id))

@@ -2,6 +2,7 @@ package service
 
 import (
 	"gorm.io/gorm"
+	"singo/control"
 	"singo/model"
 	"singo/serializer"
 
@@ -32,6 +33,11 @@ func (service *GetNewBoxService) GetNewBox(c *gin.Context) serializer.Response {
 	err = model.DB.Save(box).Error
 	if err != nil{
 		return serializer.Err(serializer.CodeDBError, "数据库操作失败", err)
+	}
+
+	err = control.OpenBoxById(box.Id, false)
+	if err != nil{
+		return serializer.Err(serializer.CodeHardwareError, "硬件操作失败", err)
 	}
 
 	return serializer.BuildNewBoxSuccessRes(box)

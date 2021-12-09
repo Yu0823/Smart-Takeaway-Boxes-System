@@ -7,6 +7,8 @@ import (
 
 // GetNewBox 获取新外卖柜接口
 func GetNewBox (c *gin.Context) {
+	//data, _ := ioutil.ReadAll(c.Request.Body)
+	//fmt.Printf("ctx.Request.body: %v\n", string(data))
 	var service service.GetNewBoxService
 	if err := c.ShouldBind(&service); err == nil {
 		res := service.GetNewBox(c)

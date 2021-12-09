@@ -29,6 +29,8 @@ const (
 	CodeDBError = 50001
 	// CodeEncryptError 加密失败
 	CodeEncryptError = 50002
+	// CodeHardwareError 硬件操作失败
+	CodeHardwareError = 50003
 	//CodeParamErr 各种奇奇怪怪的参数错误
 	CodeParamErr = 40001
 )
