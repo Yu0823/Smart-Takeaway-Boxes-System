@@ -26,6 +26,10 @@ func (service *GetNewBoxService) GetNewBox(c *gin.Context) serializer.Response {
 		}
 	}
 
+	err = control.OpenBoxById(box.Id, false)
+	if err != nil{
+		return serializer.Err(serializer.CodeHardwareError, "硬件操作失败", err)
+	}
 	//获取后进行处理
 	box.IsUsed = 1
 	box.Key = service.BoxKey
@@ -33,11 +37,6 @@ func (service *GetNewBoxService) GetNewBox(c *gin.Context) serializer.Response {
 	err = model.DB.Save(box).Error
 	if err != nil{
 		return serializer.Err(serializer.CodeDBError, "数据库操作失败", err)
-	}
-
-	err = control.OpenBoxById(box.Id, false)
-	if err != nil{
-		return serializer.Err(serializer.CodeHardwareError, "硬件操作失败", err)
 	}
 
 	return serializer.BuildNewBoxSuccessRes(box)

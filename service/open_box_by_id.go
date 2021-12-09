@@ -37,6 +37,11 @@ func (service *OpenBoxByIdService) OpenBoxById(c *gin.Context) serializer.Respon
 		return serializer.BuildNoDataRes("此id对应的密钥错误！")
 	}
 
+	err = control.OpenBoxById(box.Id, true)
+	if err != nil{
+		return serializer.Err(serializer.CodeHardwareError, "硬件操作失败", err)
+	}
+
 	//开门后进行处理
 	box.IsUsed = 0
 	box.Key = ""
@@ -44,11 +49,6 @@ func (service *OpenBoxByIdService) OpenBoxById(c *gin.Context) serializer.Respon
 	err = model.DB.Save(box).Error
 	if err != nil{
 		return serializer.Err(serializer.CodeDBError, "数据库操作失败", err)
-	}
-
-	err = control.OpenBoxById(box.Id, true)
-	if err != nil{
-		return serializer.Err(serializer.CodeHardwareError, "硬件操作失败", err)
 	}
 
 	return serializer.BuildNoDataRes(fmt.Sprintf("%d号外卖柜开门成功",box.Id))
