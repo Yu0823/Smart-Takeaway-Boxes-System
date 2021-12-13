@@ -23,6 +23,7 @@ func BuildNewBoxSuccessRes(box model.Box) Response {
 // BuildNoDataRes 无空闲外卖柜相应
 func BuildNoDataRes(msg string) Response {
 	return Response{
+		Code: -1,
 		Msg:   msg,
 	}
 }
