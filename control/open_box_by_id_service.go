@@ -9,11 +9,11 @@ import (
 )
 
 func OpenBoxById(id int64, isCus bool) error {
-	ip, err:= getIpFromTxt()
-	if err != nil{
-		return err
-	}
-	resp, err := http.Post("http://" + ip + ":80", "text/plain", strings.NewReader(getCommand(id, isCus) + "On"))
+	//ip, err:= getIpFromTxt()
+	//if err != nil{
+	//	return err
+	//}
+	resp, err := http.Post("http://466w19n475.qicp.vip", "text/plain", strings.NewReader(getCommand(id, isCus) + "On"))
 
 	if err != nil {
 		fmt.Println(err)
