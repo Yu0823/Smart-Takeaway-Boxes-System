@@ -13,7 +13,7 @@ func OpenBoxById(id int64, isCus bool) error {
 	if err != nil{
 		return err
 	}
-	resp, err := http.Post("http://" + ip + ":8000", "text/plain", strings.NewReader(getCommand(id, isCus) + "On"))
+	resp, err := http.Post("http://" + ip + ":80", "text/plain", strings.NewReader(getCommand(id, isCus) + "On"))
 
 	if err != nil {
 		fmt.Println(err)
